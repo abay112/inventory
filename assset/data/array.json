@@ -1,0 +1,81 @@
+ <script>
+    $(document).ready(function() {
+   var data = [
+        {"id":1,"first_name":"Charles","last_name":"Daniels","email":"cdaniels0@java.com","country":"China","ip_address":"27.159.97.60"},
+        {"id":2,"first_name":"Stephen","last_name":"Martinez","email":"smartinez1@hhs.gov","country":"Brazil","ip_address":"67.135.55.135"},
+        {"id":3,"first_name":"Ronald","last_name":"Cox","email":"rcox2@hatena.ne.jp","country":"Ukraine","ip_address":"74.193.127.5"},
+        {"id":4,"first_name":"Shawn","last_name":"Knight","email":"sknight3@smh.com.au","country":"Peru","ip_address":"4.104.253.210"},
+        {"id":5,"first_name":"Ann","last_name":"Brooks","email":"abrooks4@surveymonkey.com","country":"Albania","ip_address":"158.232.103.250"},
+        {"id":6,"first_name":"Louis","last_name":"Burton","email":"lburton5@blogtalkradio.com","country":"Canada","ip_address":"113.223.12.183"},
+        {"id":7,"first_name":"Heather","last_name":"Reyes","email":"hreyes6@linkedin.com","country":"Philippines","ip_address":"51.127.238.217"},
+        {"id":8,"first_name":"Teresa","last_name":"Cook","email":"tcook7@goo.gl","country":"Indonesia","ip_address":"234.162.161.124"},
+        {"id":9,"first_name":"Pamela","last_name":"Baker","email":"pbaker8@ustream.tv","country":"Indonesia","ip_address":"34.222.52.129"},
+        {"id":10,"first_name":"Jimmy","last_name":"Ryan","email":"jryan9@census.gov","country":"Colombia","ip_address":"199.218.254.19"},
+        {"id":11,"first_name":"Frank","last_name":"Garza","email":"fgarzaa@mapy.cz","country":"Poland","ip_address":"229.39.4.198"},
+        {"id":12,"first_name":"Lisa","last_name":"Rice","email":"lriceb@globo.com","country":"China","ip_address":"27.60.99.34"},
+        {"id":13,"first_name":"Terry","last_name":"Scott","email":"tscottc@symantec.com","country":"China","ip_address":"75.195.58.0"},
+        {"id":14,"first_name":"Katherine","last_name":"Peterson","email":"kpetersond@shutterfly.com","country":"Palestinian","ip_address":"27.6.67.11"},
+        {"id":15,"first_name":"Paula","last_name":"Howell","email":"phowelle@github.io","country":"Russia","ip_address":"16.99.84.99"},
+        {"id":16,"first_name":"Robin","last_name":"Jordan","email":"rjordanf@guardian.co.uk","country":"Portugal","ip_address":"154.11.121.130"},
+        {"id":17,"first_name":"Wayne","last_name":"Banks","email":"wbanksg@google.com.au","country":"Philippines","ip_address":"120.253.110.14"},
+        {"id":18,"first_name":"Phillip","last_name":"Garcia","email":"pgarciah@barnesandnoble.com","country":"Japan","ip_address":"255.45.169.17"},
+        {"id":19,"first_name":"Philip","last_name":"Reynolds","email":"preynoldsi@xinhuanet.com","country":"China","ip_address":"189.53.111.219"},
+        {"id":20,"first_name":"Maria","last_name":"Elliott","email":"melliottj@google.com.au","country":"Togo","ip_address":"134.68.23.162"}
+  ];
+
+      function format (data) {
+      return '<div class="details-container">'+
+          '<table cellpadding="5" cellspacing="0" border="0" class="details-table">'+
+              '<tr>'+
+                  '<td class="title">Person ID:</td>'+
+                  '<td>'+data.id+'</td>'+
+              '</tr>'+
+              '<tr>'+
+                  '<td class="title">Name:</td>'+
+                  '<td>'+data.first_name + ' ' + data.last_name +'</td>'+
+                  '<td class="title">Email:</td>'+
+                  '<td>'+data.email+'</td>'+
+              '</tr>'+
+              '<tr>'+
+                  '<td class="title">Country:</td>'+
+                  '<td>'+data.country+'</td>'+
+                  '<td class="title">IP Address:</td>'+
+                  '<td>'+data.ip_address+'</td>'+
+              '</tr>'+
+          '</table>'+
+        '</div>';
+  };
+            
+            var table = $('.datatables').DataTable({
+              // Column definitions
+              columns : [
+                {
+                  className      : 'details-control',
+                  defaultContent : '',
+                  data           : null,
+                  orderable      : false
+                },
+                {data : 'first_name'},
+                {data : 'last_name'},
+                {data : 'email'}
+              ],
+              data : data,
+            });
+ 
+              $('.datatables tbody').on('click', 'td.details-control', function () {
+                 var tr  = $(this).closest('tr'),
+                     row = table.row(tr);
+                
+                 if (row.child.isShown()) {
+                   tr.next('tr').removeClass('details-row');
+                   row.child.hide();
+                   tr.removeClass('shown');
+                 }
+                 else {
+                   row.child(format(row.data())).show();
+                   tr.next('tr').addClass('details-row');
+                   tr.addClass('shown');
+                 }
+            });
+      });
+ </script>
